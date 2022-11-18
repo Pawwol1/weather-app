@@ -4,6 +4,7 @@
   &__sort {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;
     &-select {
       text-transform: capitalize;
     }
@@ -24,6 +25,7 @@
   }
   &__filter {
     display: flex;
+    flex-wrap: wrap;
     padding-top: 0.5rem;
     &-select {
       margin-left: 0.25rem;

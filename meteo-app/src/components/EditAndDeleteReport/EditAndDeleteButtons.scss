@@ -1,0 +1,26 @@
+.editAndDeleteButtons {
+  display: flex;
+  button {
+    background: blue;
+    border-radius: 0.5rem;
+    border: 1px solid #4f46e5;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    margin-top: 0.25rem;
+    width: fit-content;
+    &:hover {
+      background: #4f46e5;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+  &__delete {
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.25rem;
+  }
+}

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { EditAndDeleteButtons } from "../EditAndDeleteReport/EditAndDeleteButtons";
 import { SortAndFilterData } from "../SortAndFilterData/SortAndFilterData";
 import { SortState, SortValue } from "../SortAndFilterData/SortAndFilterData";
 import "./WeatherDataDisplay.scss";
 
 export interface WeatherReport {
-  id: string;
+  id?: string;
   temperature: number;
   unit: TemperatureUnit;
   city: string;
@@ -34,11 +35,11 @@ export const WeatherDataDisplay = () => {
       }
     };
     getWeatherReports();
-  }, [URL]);
+  }, [URL, weatherData]);
 
   useEffect(() => {
     if (weatherData.length) {
-      const changeUnitToKelvin = () => {
+      const changeUnitToKelvin = async () => {
         setWeatherData((prevState) => {
           const updatedWeatherData = prevState.map((weatherReport) => {
             if (weatherReport.unit === "C") {
@@ -65,7 +66,7 @@ export const WeatherDataDisplay = () => {
       };
       changeUnitToKelvin();
     }
-  }, [weatherData]);
+  }, [weatherData.length]);
 
   const sortMethods = {
     default: { method: (a: WeatherReport, b: WeatherReport) => 0 },
@@ -81,7 +82,7 @@ export const WeatherDataDisplay = () => {
 
   return (
     <div className="weatherDataDisplay">
-      Weather Data:
+      <h2>Weather Data</h2>
       <SortAndFilterData
         sortState={sortState}
         setSortValue={setSortValue}
@@ -114,6 +115,7 @@ export const WeatherDataDisplay = () => {
                   </p>
                   <p>City: {weatherReport.city}</p>
                   <p>Date: {weatherReport.date}</p>
+                  <EditAndDeleteButtons weatherReport={weatherReport} />
                 </li>
               );
             })

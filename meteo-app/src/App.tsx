@@ -1,14 +1,17 @@
 import React from "react";
-import { WeatherDataDisplay } from "./components/WeatherDataDisplay/WeatherDataDisplay";
-import { WeatherDataForm } from "./components/WeatherDataForm/WeatherDataForm";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Main } from "./components/Main";
+import { EditReportForm } from "./components/EditReportForm/EditReportForm";
 import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <WeatherDataForm />
-      <WeatherDataDisplay />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/edit_report/:reportID" element={<EditReportForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
