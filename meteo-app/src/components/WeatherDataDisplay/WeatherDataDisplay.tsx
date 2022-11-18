@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { EditAndDeleteButtons } from "../EditAndDeleteReport/EditAndDeleteButtons";
+import { EditAndDeleteButtons } from "../EditAndDeleteButtons/EditAndDeleteButtons";
 import { SortAndFilterData } from "../SortAndFilterData/SortAndFilterData";
 import { SortState, SortValue } from "../SortAndFilterData/SortAndFilterData";
 import "./WeatherDataDisplay.scss";
