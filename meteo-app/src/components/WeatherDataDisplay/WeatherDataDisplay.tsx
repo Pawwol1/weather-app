@@ -29,44 +29,35 @@ export const WeatherDataDisplay = () => {
           throw new Error(err);
         }
         const data = await res.json();
-        setWeatherData(data);
+
+        const updatedWeatherData = data.map((weatherReport: WeatherReport) => {
+          if (weatherReport.unit.toLocaleUpperCase() === "C") {
+            return {
+              ...weatherReport,
+              temperature: +(weatherReport.temperature + 273.15).toFixed(0),
+              unit: "K" as TemperatureUnit,
+            };
+          }
+          if (weatherReport.unit.toLocaleUpperCase() === "F") {
+            return {
+              ...weatherReport,
+              temperature: +(
+                ((weatherReport.temperature + 459.67) * 5) /
+                9
+              ).toFixed(0),
+              unit: "K" as TemperatureUnit,
+            };
+          }
+          return weatherReport;
+        });
+
+        setWeatherData(updatedWeatherData);
       } catch (error) {
         console.error(error);
       }
     };
     getWeatherReports();
   }, [URL, weatherData]);
-
-  useEffect(() => {
-    if (weatherData.length) {
-      const changeUnitToKelvin = async () => {
-        setWeatherData((prevState) => {
-          const updatedWeatherData = prevState.map((weatherReport) => {
-            if (weatherReport.unit === "C") {
-              return {
-                ...weatherReport,
-                temperature: +(weatherReport.temperature + 273.15).toFixed(0),
-                unit: "K" as TemperatureUnit,
-              };
-            }
-            if (weatherReport.unit === "F") {
-              return {
-                ...weatherReport,
-                temperature: +(
-                  ((weatherReport.temperature + 459.67) * 5) /
-                  9
-                ).toFixed(0),
-                unit: "K" as TemperatureUnit,
-              };
-            }
-            return weatherReport;
-          });
-          return updatedWeatherData;
-        });
-      };
-      changeUnitToKelvin();
-    }
-  }, [weatherData.length]);
 
   const sortMethods = {
     default: { method: (a: WeatherReport, b: WeatherReport) => 0 },
@@ -111,7 +102,7 @@ export const WeatherDataDisplay = () => {
                 >
                   <p>
                     Temperature: {weatherReport.temperature}
-                    {weatherReport.unit}
+                    {weatherReport.unit.toLocaleUpperCase()}
                   </p>
                   <p>City: {weatherReport.city}</p>
                   <p>Date: {weatherReport.date}</p>

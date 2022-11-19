@@ -1,11 +1,11 @@
 import React from "react";
 import { WeatherDataDisplay } from "./WeatherDataDisplay/WeatherDataDisplay";
-import { WeatherDataForm } from "./WeatherDataForm/WeatherDataForm";
+import { AddReportForm } from "./AddReportForm/AddReportForm";
 
 export const Main = () => {
   return (
     <div className="App">
-      <WeatherDataForm />
+      <AddReportForm />
       <WeatherDataDisplay />
     </div>
   );
